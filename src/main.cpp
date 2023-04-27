@@ -118,6 +118,7 @@ int main() {
         }
     });
 
+    //TODO: maybe remove this, because not necessary
     bot.on_autocomplete([&bot](const dpp::autocomplete_t &event) {
         for (auto &opt: event.options) {
             if (opt.focused) {
@@ -134,7 +135,6 @@ int main() {
             }
         }
     });
-
     bot.start(dpp::st_wait);
 
     return 0;
