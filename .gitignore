@@ -2,4 +2,4 @@
 /cmake-build-debug/
 /libs/
 /.idea
-/src/Token.h
+/src/DiscordToken.h

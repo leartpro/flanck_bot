@@ -1,9 +1,10 @@
 #include <dpp/dpp.h>
-#include "Token.h"
+#include "flanck/flanck.h"
+#include "DiscordToken.h"
 
 int main() {
 
-    dpp::cluster bot(Token::getToken());
+    dpp::cluster bot(DiscordToken::getToken());
 
     bot.on_log(dpp::utility::cout_logger());
 
