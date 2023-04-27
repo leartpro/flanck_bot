@@ -5,8 +5,14 @@
 int main() {
 
     dpp::cluster bot(DiscordToken::getToken());
-
     bot.on_log(dpp::utility::cout_logger());
+    //unregister all commands
+    /*
+    auto commands = bot.global_commands_get_sync();
+    for(auto &command : commands) {
+        bot.global_command_delete(command.first);
+    }
+     */
 
     /* Executes on ready. */
     bot.on_ready([&bot](const dpp::ready_t &event) {
@@ -56,10 +62,13 @@ int main() {
                 /* Checks if the subcommand has any options. */
                 if (!subcommand.options.empty()) {
                     //init arguments
+                    //TODO: if not all arguments are given, the application does not respond
+                    // because e.g. options[3] has no value on size 2
+                    // use lop instead and evaluate by switch(subcommand.options[1].name)
                     const char* programText = get<string>(subcommand.options[0].value).c_str();
+                    bool input_as_binary = get<string>(subcommand.options[1].value) != "-a";
+                    bool output_as_binary = get<string>(subcommand.options[2].value) != "-a";
                     string user_input = get<string>(subcommand.options[3].value);
-                    bool input_as_binary = get<string>(subcommand.options[1].value) == "-b";
-                    bool output_as_binary = get<string>(subcommand.options[2].value) == "-b";
                     vector<Stack> stacks;
                     vector<string> input_stacks;
                     //init user input
